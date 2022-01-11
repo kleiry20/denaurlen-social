@@ -40,7 +40,7 @@ function Credentials() {
     return (
       <Redirect
         to={{
-          pathname: "/validation",
+          pathname: "/valuation",
           state: { username: user.username, userid: userid },
         }}
       />
@@ -48,13 +48,13 @@ function Credentials() {
   } else {
     return (
       <div className="container fluid p-5">
-        <div className="row justify-content-center align-center">
+        <div className="row justify-content-center ">
           <div className="col-sm-3">
             <Form onSubmit={submitForm}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label style={{ fontSize: "24px" }}>
+                <h3 style={{ fontSize: "24px" }} className="text-start">
                   Enter the credentials
-                </Form.Label>
+                </h3>
                 <Form.Control
                   type="text"
                   placeholder="Enter your name"
@@ -70,7 +70,11 @@ function Credentials() {
                 />
               </Form.Group>
               <div className="row p-2">
-                <Button type="submit" className="btn btn-primary">
+                <Button
+                  type="submit"
+                  className="btn btn-primary"
+                  style={{ background: "#4B0082" }}
+                >
                   Submit
                 </Button>
               </div>

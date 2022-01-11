@@ -10,3 +10,25 @@
     margin-top: 7px;
     margin-left: 5px;
   }
+
+  #dropdown {
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding-left: 40px;
+    margin: 0px;
+  }
+  
+  .dot-hamb {
+    width: 5px;
+    height: 5px;
+    margin: 5px;
+    background: #968C9D;
+    border-radius: 50%;
+  }
+  .timer-box{
+    background-color: #ECE6F0;
+    padding: 5px 10px;
+    border-radius: 3px;
+    margin: 10px 5px;
+  }

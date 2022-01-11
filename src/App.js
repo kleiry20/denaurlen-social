@@ -3,7 +3,7 @@ import "./App.css";
 // import React from "react"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Credentials from "./components/credentials";
-import Validation from "./components/valuation";
+import Valuation from "./components/valuation";
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
           <Route exact path="/">
             <Credentials />
           </Route>
-          <Route path="/validation">
-            <Validation />
+          <Route path="/valuation">
+            <Valuation />
           </Route>
         </Switch>
       </BrowserRouter>

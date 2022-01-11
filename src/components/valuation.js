@@ -27,14 +27,16 @@ function MyTimer({ expiryTimestamp }) {
   });
 
   return (
-    <div style={{ textAlign: "right" }}>
-      <div style={{ fontSize: "20px" }}>
-        <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+    <div className="float-end">
+      <div style={{ fontSize: "20px" }} className="mt-3">
+        <span className="timer-box">{hours}</span>:
+        <span className="timer-box">{minutes}</span>:
+        <span className="timer-box">{seconds}</span>
       </div>
     </div>
   );
 }
-function Validation(props) {
+function Valuation(props) {
   const location = useLocation();
   const { username, userid } = location.state;
   let [grossCoins, setGrossCoins] = useState(0);
@@ -134,7 +136,7 @@ function Validation(props) {
               <Image className="ms-1" src={greenArrow} alt="arrow" />
             </span>
           </div>
-          <p className="card-text " style={{ fontSize: "12px" }}>
+          <p className="card-text " style={{ fontSize: "14px" }}>
             {leaduser.username}
             <span className="text-muted"> in Lead</span>
           </p>
@@ -179,9 +181,14 @@ function Validation(props) {
             }}
           />
         </div>
-        <div className="mx-1">
-          <p className="card-text m-0">alfredo_rosser1</p>
-          <p className="card-text text-muted" style={{ fontSize: "12px" }}>
+        <div className="mx-1 align-left">
+          <p className="card-text mb-0" style={{ textAlign: "left" }}>
+            alfredo_rosser1
+          </p>
+          <p
+            className="card-text text-muted"
+            style={{ fontSize: "12px", textAlign: "left" }}
+          >
             6 June 2021, 12:10 pm
           </p>
         </div>
@@ -189,14 +196,16 @@ function Validation(props) {
           <Image src={Ellipse1} className="img-fluid rounded-start" alt=".." />
           <span className="card-text ms-2">{gc} </span>
           <p className="card-text text-muted" style={{ fontSize: "12px" }}>
-            Gross coins
+            Gross Coins
           </p>
         </div>
         <div className="ms-2">
           <Image className="float-end" src={greenArrow} alt="arrow" />
         </div>
-        <div className="ms-2">
-          <Image className="float-end" src={greenArrow} alt="arrow" />
+        <div id="dropdown">
+          <div className="dot-hamb"></div>
+          <div className="dot-hamb"></div>
+          <div className="dot-hamb"></div>
         </div>
       </div>
       {/* POST */}
@@ -204,67 +213,57 @@ function Validation(props) {
         <Image className="img-fluid m-0 p-0" src={post} alt="post" />
       </div>
       {/* BELOW POST */}
-      <div className=" mt-2 ms-1">
-        <Image
-          src={Vector}
-          className="img-fluid me-2"
-          alt=".."
-          style={{
-            width: "30px",
-            height: "30px",
-          }}
-        />
-        <Image
-          src={comment}
-          className="img-fluid me-1"
-          alt=".."
-          style={{
-            width: "30px",
-            height: "30px",
-          }}
-        />
-        <Image
-          src={share}
-          className="img-fluid me-1"
-          alt=".."
-          style={{
-            width: "30px",
-            height: "30px",
-          }}
-        />
-        <div className="me-2 float-end">
+      <div className="row m-0 p-0 mt-4">
+        <div className="col-6 float-start text-start">
+          <Image
+            src={Vector}
+            className="img-fluid me-2"
+            alt=".."
+            style={{
+              width: "30px",
+              height: "30px",
+            }}
+          />
+          <Image
+            src={comment}
+            className="img-fluid me-2"
+            alt=".."
+            style={{
+              width: "30px",
+              height: "30px",
+            }}
+          />
+          <Image
+            src={share}
+            className="img-fluid"
+            alt=".."
+            style={{
+              width: "30px",
+              height: "30px",
+            }}
+          />
+        </div>
+        <div className="col-6 float-end text-end">
           <button
             type="button"
-            className="btn btn-primary "
+            className="btn btn-primary fs-5"
             style={{ background: "#4B0082", borderRadius: "5px" }}
           >
             <span onClick={leadPoints}>Lead +100</span>
-            <span
-              className={`dot box`}
-              // style={{
-              //   height: "25px",
-              //   width: "25px",
-
-              //   borderRadius: "50%",
-              //   display: "inline-block",
-              // }}
-            ></span>
+            <span className={`dot box`}></span>
           </button>
         </div>
       </div>
-      <p
-        className="ms-2 mt-2"
-        style={{ fontSize: "14px", fontFamily: "Inter" }}
-      >
+      <p className="ms-3 mt-2 text-start" style={{ fontSize: "16px" }}>
         50 interested
       </p>
       {/* row-1 */}
-      <div className="row">
-        <div className="d-flex align-items-center my-2">
+      <div className="row m-0 p-0">
+        <div className="col-6 d-flex align-items-center my-2">
           <div className="ms-1">
             <Image
               src={commentor}
-              className="ms-2 img-fluid rounded-start"
+              className="ms-1 img-fluid rounded-start"
               alt=".."
               style={{
                 width: "65px",
@@ -273,18 +272,22 @@ function Validation(props) {
             />
           </div>
           {showLeadUser()}
-          <MyTimer expiryTimestamp={time} />
+        </div>
+        <div className="col-6 float-end fs-3">
+          <MyTimer expiryTimestamp={1642439540516} />
         </div>
       </div>
       {/* row-2 */}
-      <div className="row m-2 ">
+      <div className="m-2 ">
         <div className="p-0">
           @alfredo r.. <span> If everything seems under control, you're</span>
         </div>
-        <p className="p-0">going fast enough. Be Fast, Be Curious..! 😎</p>
+        <p className="p-0 ms-2 text-start">
+          going fast enough. Be Fast, Be Curious..! 😎
+        </p>
       </div>
     </div>
   );
 }
 
-export default Validation;
+export default Valuation;
