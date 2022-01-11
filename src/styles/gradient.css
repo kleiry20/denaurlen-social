@@ -1,0 +1,12 @@
+.box{
+    /* height:200px;
+    width:200px; */
+    background:linear-gradient(rgba(250,0,0,0.5),transparent);
+    background-color:orange; /*this your primary color*/
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-top: 7px;
+    margin-left: 5px;
+  }
