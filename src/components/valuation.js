@@ -37,7 +37,7 @@ function MyTimer({ expiryTimestamp }) {
 function Validation(props) {
   const location = useLocation();
   const { username, userid } = location.state;
-  let [grossCoins, setGrossCoins] = useState(2100);
+  let [grossCoins, setGrossCoins] = useState(0);
   let [updateGC, setUpdateGC] = useState(false);
   let [user, setUser] = useState({});
   let [leaduser, setLeadUser] = useState({});
@@ -48,7 +48,7 @@ function Validation(props) {
       .get(Url + "/grosscoins")
       .then(function (response) {
         // handle success
-        setGrossCoins(response.data[0].total.$numberLong);
+        setGrossCoins(response.data[0].total.$numberInt);
       })
       .catch(function (error) {
         // handle error
@@ -77,9 +77,18 @@ function Validation(props) {
   }, [grossCoins]);
 
   function leadPoints() {
+    let new_nc = 100;
+    let new_gc = 0;
+    if (leaduser.username !== undefined) {
+      new_nc = parseInt(leaduser.net_coins.$numberInt) + 100;
+      new_gc = parseInt(leaduser.gross_coins.$numberInt) + new_nc;
+    } else {
+      new_gc = 100;
+    }
     axios
       .post(Url + "/leadpoints?id=" + userid, {
-        coins: user.coins ? parseInt(user.coins.$numberInt) + 100 : 100,
+        net_coins: new_nc,
+        gross_coins: new_gc,
         lead: true,
       })
       .then(function (response) {
@@ -107,8 +116,55 @@ function Validation(props) {
       });
   }, [user]);
 
+  function showLeadUser() {
+    if (leaduser.username !== undefined) {
+      let leadCoins = leaduser.net_coins
+        ? parseInt(leaduser.net_coins.$numberInt)
+        : 0;
+      return (
+        <div className="mx-1 ms-3">
+          <div>
+            <Image
+              src={Ellipse1}
+              className="img-fluid rounded-start me-1"
+              alt=".."
+            />
+            <span className="">
+              {leadCoins}
+              <Image className="ms-1" src={greenArrow} alt="arrow" />
+            </span>
+          </div>
+          <p className="card-text " style={{ fontSize: "12px" }}>
+            {leaduser.username}
+            <span className="text-muted"> in Lead</span>
+          </p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="mx-1 ms-3">
+          <div>
+            <Image
+              src={Ellipse1}
+              className="img-fluid rounded-start me-1"
+              alt=".."
+            />
+            <span className="">
+              0
+              <Image className="ms-1" src={greenArrow} alt="arrow" />
+            </span>
+          </div>
+          <p className="card-text " style={{ fontSize: "12px" }}>
+            No Lead Found
+            <span className="text-muted"> in Lead</span>
+          </p>
+        </div>
+      );
+    }
+  }
+
   time.setSeconds(time.getSeconds() + 600);
-  let leadCoins = leaduser.coins ? parseInt(leaduser.coins.$numberInt) : 0;
+  let gc = leaduser.gross_coins ? parseInt(leaduser.gross_coins.$numberInt) : 0;
   return (
     <div className="container fluid m-0 p-0">
       <div className="d-flex align-items-center my-2">
@@ -131,7 +187,7 @@ function Validation(props) {
         </div>
         <div className="ms-5">
           <Image src={Ellipse1} className="img-fluid rounded-start" alt=".." />
-          <span className="card-text ms-2">{grossCoins} </span>
+          <span className="card-text ms-2">{gc} </span>
           <p className="card-text text-muted" style={{ fontSize: "12px" }}>
             Gross coins
           </p>
@@ -216,43 +272,7 @@ function Validation(props) {
               }}
             />
           </div>
-          <div className="mx-1 ms-3">
-            <div>
-              <Image
-                src={Ellipse1}
-                className="img-fluid rounded-start me-1"
-                alt=".."
-              />
-              <span className="">
-                {leadCoins}
-                <Image className="ms-1" src={greenArrow} alt="arrow" />
-              </span>
-            </div>
-            <p className="card-text " style={{ fontSize: "12px" }}>
-              {leaduser.username}
-              <span className="text-muted"> in Lead</span>
-            </p>
-          </div>
-          {/* <div className="ms-5 float-end align-items-center">
-              <div
-                className="d-flex"
-                style={{ background: "#ECE6F0", borderRadius: "2.80499px" }}
-              >
-                144
-              </div>
-              <div
-                className="d-flex"
-                style={{ background: "#ECE6F0", borderRadius: "2.80499px" }}
-              >
-                :0
-              </div>
-              <div
-                className="d-flex"
-                style={{ background: "#ECE6F0", borderRadius: "2.80499px" }}
-              >
-                :0
-              </div>
-            </div> */}
+          {showLeadUser()}
           <MyTimer expiryTimestamp={time} />
         </div>
       </div>

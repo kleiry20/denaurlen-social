@@ -17,7 +17,11 @@ function Credentials() {
     axios
       .post(Url + "/users", user)
       .then(function (response) {
-        setUserid(response.data._id.$oid);
+        if (response.data.create) {
+          setUserid(response.data.user.insertedId.$oid);
+        } else {
+          setUserid(response.data.user._id.$oid);
+        }
         setRedirect(true);
       })
       .catch(function (error) {
@@ -30,6 +34,8 @@ function Credentials() {
     user[event.target.name] = event.target.value;
     setUser(user);
   }
+
+  // redirect = { ...redirect };
   if (redirect) {
     return (
       <Redirect
