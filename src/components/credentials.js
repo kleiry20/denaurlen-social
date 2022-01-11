@@ -72,7 +72,7 @@ function Credentials() {
               <div className="row p-2">
                 <Button
                   type="submit"
-                  className="btn btn-primary"
+                  className="btn btn-primary border-white"
                   style={{ background: "#4B0082" }}
                 >
                   Submit

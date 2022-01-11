@@ -246,7 +246,7 @@ function Valuation(props) {
         <div className="col-6 float-end text-end">
           <button
             type="button"
-            className="btn btn-primary fs-5"
+            className="btn btn-primary border-white fs-5"
             style={{ background: "#4B0082", borderRadius: "5px" }}
           >
             <span onClick={leadPoints}>Lead +100</span>
